@@ -85,8 +85,10 @@ export function LoginForm() {
 
       const message =
         error.response?.data?.message || error.response?.data?.error || "";
+      console.log("MESSAGE:", error.response?.data);
 
       if (message.toLowerCase().includes("account not verified")) {
+        console.log("FULL ERROR:", error.response?.data);
         setErrors({
           general:
             "Your account is not verified. Please verify your email before logging in.",
@@ -94,6 +96,8 @@ export function LoginForm() {
       } else if (error.response?.status === 422) {
         setErrors({ general: message || "Invalid credentials." });
       } else {
+        console.log("Login error response:", message);
+
         setErrors({ general: "Something went wrong. Please try again." });
       }
     } finally {
@@ -103,12 +107,12 @@ export function LoginForm() {
 
   const handleInputChange =
     (field: keyof LoginFormData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
-      if (errors[field]) {
-        setErrors((prev) => ({ ...prev, [field]: undefined }));
-      }
-    };
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+        if (errors[field]) {
+          setErrors((prev) => ({ ...prev, [field]: undefined }));
+        }
+      };
 
   return (
     <Card className="shadow-xl border-0">
@@ -131,9 +135,8 @@ export function LoginForm() {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleInputChange("email")}
-                className={`pl-10 ${
-                  errors.email ? "border-red-500 focus:border-red-500" : ""
-                }`}
+                className={`pl-10 ${errors.email ? "border-red-500 focus:border-red-500" : ""
+                  }`}
                 disabled={isLoading}
               />
             </div>
@@ -153,9 +156,8 @@ export function LoginForm() {
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleInputChange("password")}
-                className={`pl-10 pr-10 ${
-                  errors.password ? "border-red-500 focus:border-red-500" : ""
-                }`}
+                className={`pl-10 pr-10 ${errors.password ? "border-red-500 focus:border-red-500" : ""
+                  }`}
                 disabled={isLoading}
               />
               <button

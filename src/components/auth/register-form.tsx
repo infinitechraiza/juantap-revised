@@ -126,12 +126,12 @@ export function RegisterForm() {
 
   const handleInputChange =
     (field: keyof RegisterFormData) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value =
-        field === "agreeToTerms" ? e.target.checked : e.target.value;
-      setFormData((prev) => ({ ...prev, [field]: value }));
-      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
-    };
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value =
+          field === "agreeToTerms" ? e.target.checked : e.target.value;
+        setFormData((prev) => ({ ...prev, [field]: value }));
+        if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+      };
 
   return (
     <Card className="shadow-xl border-0">
@@ -159,9 +159,8 @@ export function RegisterForm() {
                     onChange={handleInputChange(
                       field as keyof RegisterFormData
                     )}
-                    className={`pl-10 ${
-                      errors[field as keyof FormErrors] ? "border-red-500" : ""
-                    }`}
+                    className={`pl-10 ${errors[field as keyof FormErrors] ? "border-red-500" : ""
+                      }`}
                     disabled={isLoading}
                   />
                 </div>
@@ -217,9 +216,8 @@ export function RegisterForm() {
                   placeholder={label}
                   value={formData[id as keyof RegisterFormData] as string}
                   onChange={handleInputChange(id as keyof RegisterFormData)}
-                  className={`pl-10 pr-10 ${
-                    errors[id as keyof FormErrors] ? "border-red-500" : ""
-                  }`}
+                  className={`pl-10 pr-10 ${errors[id as keyof FormErrors] ? "border-red-500" : ""
+                    }`}
                   disabled={isLoading}
                 />
                 <button
@@ -286,3 +284,4 @@ export function RegisterForm() {
     </Card>
   );
 }
+
