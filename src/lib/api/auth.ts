@@ -1,7 +1,7 @@
 // lib/api/auth.ts
 import axios from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3306/api";
 
 export interface RegisterPayload {
   first_name: string;
@@ -27,7 +27,7 @@ console.log(`${API_BASE_URL}/login`); // must be /api/login
 // not working
 export async function sendVerificationEmail() {
   return axios.post(
-    `/email/verification-notification`,
+    `${API_BASE_URL}/email/verification-notification`,
     {},
     {
       withCredentials: true,
